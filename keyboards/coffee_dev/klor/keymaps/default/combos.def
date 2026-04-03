@@ -1,0 +1,9 @@
+// ┌───────────────────────────────────────────────────────────┐
+// │ c o m b o keys                                            │
+// └───────────────────────────────────────────────────────────┘
+
+COMB(QW_ESC, KC_ESC, KC_Q, KC_W)
+COMB(WE_CLOSETAB, LCTL(KC_F4), KC_W, KC_E)
+COMB(ER_LASTTAB, LCTL(LSFT(KC_T)), KC_E, KC_R)
+COMB(RT_PRTSCR, KC_PSCR, KC_R, KC_T)
+COMB(WR_TERMINAL, LCTL(LALT(KC_T)), KC_W, KC_R)

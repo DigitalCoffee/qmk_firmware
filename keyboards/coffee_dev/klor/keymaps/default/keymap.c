@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "klor.h"
+#include "g/keymap_combo.h"
 
 #ifdef HAPTIC_ENABLE
 #include "drivers/haptic/drv2605l.h"
@@ -803,37 +804,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
-
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ c o m b o keys                                            │
-// └───────────────────────────────────────────────────────────┘
-
-#ifdef COMBO_ENABLE
-
-enum combos {
-  QW_ESC,
-  WE_CLOSETAB,
-  ER_LASTTAB,
-  RT_PRTSCR,
-  WR_TERMINAL,
-};
-
-const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM rt_combo[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM wr_combo[] = {KC_W, KC_R, COMBO_END};
-
-combo_t key_combos[] = {
-  [QW_ESC] = COMBO(qw_combo, KC_ESC),
-  [WE_CLOSETAB] = COMBO(we_combo, LCTL(KC_F4)),
-  [ER_LASTTAB] = COMBO(er_combo, LCTL(LSFT(KC_T))),
-  [RT_PRTSCR] = COMBO(rt_combo, KC_PSCR),
-  [WR_TERMINAL] = COMBO(wr_combo, LCTL(LALT(KC_T))),
-};
-
-#endif // COMBO_ENABLE
 /*
 
                                                        ▐█    ▟▛ ▐█     ▄▆▀▀▀▀▀▀▆▄  ▐█▀▀▀▀▀█▌
