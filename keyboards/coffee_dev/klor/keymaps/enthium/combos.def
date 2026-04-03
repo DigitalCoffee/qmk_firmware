@@ -1,0 +1,14 @@
+// ┌───────────────────────────────────────────────────────────┐
+// │ c o m b o keys                                            │
+// └───────────────────────────────────────────────────────────┘
+
+// ENTHIUM v14 RAKEDOWN & SLIDE COMBOS ├───────────────────────────────────┐
+
+COMB(RAKEDOWN_UE, RD_UE, KC_U, SFT_E)
+COMB(RAKEDOWN_OA, RD_OA, KC_O, CTRL_A)
+COMB(RAKEDOWN_NF, RD_NF, ALT_N, KC_F)
+COMB(RAKEDOWN_YI, RD_YI, KC_Y, ALT_I)
+COMB(SLIDE_EDASH, SD_EDASH, SFT_E, KC_MINS)
+COMB(SLIDE_SW, SD_SW, GUI_S, KC_W)
+COMB(RAKEDOWN_ADOT, RD_ADOT, CTRL_A, KC_DOT)
+COMB(RAKEDOWN_HM, RD_HM, SFT_H, KC_M)
