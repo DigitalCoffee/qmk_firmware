@@ -43,6 +43,8 @@ for more options.
 // When idle, turn off Caps Word after 5 seconds.
 #define CAPS_WORD_IDLE_TIMEOUT 5000
 
+#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
+
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 //#define NO_ACTION_ONESHOT

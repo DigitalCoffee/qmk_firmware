@@ -38,6 +38,7 @@
 enum klor_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _ALPHA,
+    _SYMBOL,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -47,6 +48,7 @@ enum klor_layers {
 enum custom_keycodes {
     MAKE_H = SAFE_RANGE,
     OS_SWAP,
+    ARROW,
     RD_UE,
     RD_OA,
     RD_NF,
@@ -74,6 +76,17 @@ enum custom_keycodes {
 #define CTRL_T MT(MOD_LCTL, KC_T)
 #define ALT_N MT(MOD_LALT, KC_N)
 #define GUI_S MT(MOD_LGUI, KC_S)
+
+// THUMB LAYER TAPS ├───────────────────────────────────┐
+
+#define SYM_R LT(_SYMBOL, KC_R)
+
+// SYMBOL LAYER HOME ROW MODS ├───────────────────────────────────┐
+
+#define SFT_BSP MT(MOD_RSFT, KC_BSPC)
+#define CTRL_TB MT(MOD_LCTL, KC_TAB)
+#define ALT_SPC MT(MOD_LALT, KC_SPC)
+#define GUI_ENT MT(MOD_LGUI, KC_ENT)
 
 
 #include "g/keymap_combo.h"
@@ -127,8 +140,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   KC_UNDS,  KC_SPC,   QK_REP,   KC_ESC,    KC_BSPC,  QK_AREP,  KC_R,     OS_LSFT
+                                   KC_UNDS,  KC_SPC,   QK_REP,   KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
 ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ s y m b o l                                               │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │    {    │    (    │    )    │    }    │    ?    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    .    │    +    │    &    │   INS   │    →    │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │    #    │    ^    │    =    │    _    │    $    │    *    ├─╯                ╰─┤    ,    │  BSPCE  │   TAB   │  SPACE  │  ENTER  │   ESC   │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │    ~    │    <    │    |    │    -    │    >    │    /    ││  MUTE  ││PLY/PSE ││    ;    │    "    │    '    │    `    │   OSS   │    !    │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │    %    │    :    │    @    │    \    ││         │         │         │  LLCK   │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_SYMBOL] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_PLUS,  KC_AMPR,  KC_INS,   ARROW,
+     KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  KC_ESC,
+     KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   OS_LSFT,  KC_EXLM,
+                                   KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  _______,  KC_TRNS,  QK_LLCK
+ ),
 
  /*
    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
@@ -148,10 +185,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_TEMPLATE] = LAYOUT_polydactyl(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
-              _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,
-                                  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______
+               _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,
+     _______,  _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,  _______,
+     _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,
+                                   _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______
  )
 
  */
@@ -346,12 +383,13 @@ void render_os_lock_status(void) {
 
 // layer status ──────────────────────────────────────────┐
 
-int layerstate = 0;
-
 layer_state_t layer_state_set_kb(layer_state_t state) {
-      switch (get_highest_layer(layer_state | default_layer_state)) {
+      switch (get_highest_layer(state)) {
             case 0:
                 strcpy ( layer_state_str, "BASE ENTHIUM");
+                break;
+            case 1:
+                strcpy ( layer_state_str, "SYMBOLS");
                 break;
             default:
                 strcpy ( layer_state_str, "XXXXXX");
@@ -499,18 +537,33 @@ bool oled_task_kb(void) {
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
+    const uint8_t mods = get_mods();
+    const uint8_t all_mods = (mods | get_weak_mods()
+#ifndef NO_ACTION_ONESHOT
+                            | get_oneshot_mods()
+#endif  // NO_ACTION_ONESHOT
+    );
+    const uint8_t shift_mods = all_mods & MOD_MASK_SHIFT;
+    const bool alt = all_mods & MOD_BIT_LALT;
 
-        case OS_SWAP:
-            if (record->event.pressed) {
+    if (record->event.pressed) {
+        switch (keycode) {
+
+// ┌───────────────────────────────────────────────────────────┐
+// │ m a c r o                                                 │
+// └───────────────────────────────────────────────────────────┘
+
+            case OS_SWAP:
                 if (!keymap_config.swap_lctl_lgui) {
                   keymap_config.swap_lctl_lgui = true;  // ─── MAC
+                  set_unicode_input_mode(UNICODE_MODE_MACOS);
                   #ifdef AUDIO_ENABLE
                     PLAY_SONG(mac_song);
                   #endif // AUDIO_ENABLE
                 }
                 else {
                   keymap_config.swap_lctl_lgui = false; // ─── WIN
+                  set_unicode_input_mode(UNICODE_MODE_LINUX);
                   #ifdef AUDIO_ENABLE
                     PLAY_SONG(winxp_song);
                   #endif // AUDIO_ENABLE
@@ -518,11 +571,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //              #ifdef HAPTIC_ENABLE
 //                drv2605l_pulse(52);
 //              #endif // HAPTIC_ENABLE
-            eeconfig_update_keymap(&keymap_config);
-            clear_keyboard();  // ──── clear to prevent stuck keys
-            return false;
-          }
+                eeconfig_update_keymap(&keymap_config);
+                clear_keyboard();  // ──── clear to prevent stuck keys
+                return false;
 
+            case ARROW:
+                send_unicode_string(alt ? (shift_mods
+                                            ? "\xe2\x87\x94"     // <=>
+                                            : "\xe2\x86\x94")    // <->
+                                            : (shift_mods
+                                            ? "\xe2\x87\x92"     // =>
+                                            : "\xe2\x86\x92"));  // ->
+                return false;
 
 // ┌───────────────────────────────────────────────────────────┐
 // │ l a y e r                                                 │
@@ -533,69 +593,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // │ q m k                                                     │
 // └───────────────────────────────────────────────────────────┘
 
-        case MAKE_H:
-          if (record->event.pressed) {
-            SEND_STRING ("qmk compile -kb coffee_dev/klor -km enthium");
-            tap_code(KC_ENTER);
-          }
-          break;
+            case MAKE_H:
+                SEND_STRING ("qmk compile -kb coffee_dev/klor -km enthium");
+                tap_code(KC_ENTER);
+                break;
 
 // ┌───────────────────────────────────────────────────────────┐
 // │ p r o d u c t i v i t y                                   │
 // └───────────────────────────────────────────────────────────┘
 
-      case KC_MPLY:
-        if (record->event.pressed) {
-//          #ifdef HAPTIC_ENABLE
-//                  drv2605l_pulse(4);
-//          #endif // HAPTIC_ENABLE
-        }
-        break;
+            case KC_MPLY:
+//              #ifdef HAPTIC_ENABLE
+//                      drv2605l_pulse(4);
+//              #endif // HAPTIC_ENABLE
+                break;
 
 // ┌───────────────────────────────────────────────────────────┐
 // │ r a k e d o w n  &  s l i d e                             │
 // └───────────────────────────────────────────────────────────┘
 
-        case RD_UE:
-            if (record->event.pressed) {
-                SEND_STRING("ue");
-            }
-            break;
-        case RD_OA:
-            if (record->event.pressed) {
-                SEND_STRING("oa");
-            }
-            break;
-        case RD_NF:
-            if (record->event.pressed) {
-                SEND_STRING("nf");
-            }
-            break;
-        case RD_YI:
-            if (record->event.pressed) {
-                SEND_STRING("yi");
-            }
-            break;
-        case SD_EDASH:
-            if (record->event.pressed) {
-                SEND_STRING("e-");
-            }
-            break;
-        case SD_SW:
-            if (record->event.pressed) {
-                SEND_STRING("sw");
-            }
-            break;
-        case RD_ADOT:
-            if (record->event.pressed) {
-                SEND_STRING("a.");
-            }
-            break;
-        case RD_HM:
-            if (record->event.pressed) {
-                SEND_STRING("hm");
-            }
-            break;
+            case RD_UE:     SEND_STRING("ue"); break;
+            case RD_OA:     SEND_STRING("oa"); break;
+            case RD_NF:     SEND_STRING("nf"); break;
+            case RD_YI:     SEND_STRING("yi"); break;
+            case SD_EDASH:  SEND_STRING("e-"); break;
+            case SD_SW:     SEND_STRING("sw"); break;
+            case RD_ADOT:   SEND_STRING("a."); break;
+            case RD_HM:     SEND_STRING("hm"); break;
+        }
     }
     return true;
 }
@@ -608,7 +633,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_LEFT, KC_RIGHT) },
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [1] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
