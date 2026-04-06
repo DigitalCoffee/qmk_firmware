@@ -181,9 +181,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_SYMBOL] = LAYOUT_polydactyl(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
-               KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_PLUS,  KC_AMPR,  KC_INS,   ARROW,
-     KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  KC_ESC,
-     KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   OS_LSFT,  KC_EXLM,
+               KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_PLUS,  KC_AMPR,  KC_INS,   KC_ESC,
+     KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  KC_EXLM,
+     KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   ARROW,    OS_LSFT,
                                    KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  _______,  KC_TRNS,  QK_LLCK
  ),
 
