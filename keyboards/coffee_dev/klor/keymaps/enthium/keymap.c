@@ -39,6 +39,7 @@ enum klor_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _ALPHA,
     _SYMBOL,
+    _CURSOR,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -79,6 +80,8 @@ enum custom_keycodes {
 
 // THUMB LAYER TAPS ├───────────────────────────────────┐
 
+#define CRSR_SPC LT(_CURSOR, KC_SPC)
+
 #define SYM_R LT(_SYMBOL, KC_R)
 
 // SYMBOL LAYER HOME ROW MODS ├───────────────────────────────────┐
@@ -88,6 +91,23 @@ enum custom_keycodes {
 #define ALT_SPC MT(MOD_LALT, KC_SPC)
 #define GUI_ENT MT(MOD_LGUI, KC_ENT)
 
+// OTHER MACROS ├───────────────────────────────────┐
+
+#define M_CUT C(KC_X)
+#define M_COPY C(KC_C)
+#define M_PASTE C(KC_V)
+
+#define M_UNDO C(KC_Z)
+#define M_REDO C(KC_Y)
+
+#define M_SELALL C(KC_A)
+
+#define M_FIND C(KC_F)
+#define M_FNDRPL C(KC_H)
+
+#define M_SFTTAB S(KC_TAB)
+
+#define M_ADRBAR C(KC_L)
 
 #include "g/keymap_combo.h"
 
@@ -140,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   KC_UNDS,  KC_SPC,   QK_REP,   KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
+                                   KC_UNDS,  CRSR_SPC, QK_REP,   KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
 ),
 
  /*
@@ -165,6 +185,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  KC_ESC,
      KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   OS_LSFT,  KC_EXLM,
                                    KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  _______,  KC_TRNS,  QK_LLCK
+ ),
+
+/*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ c u r s o r                                               │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │  ENTER  │  SPACE  │   TAB   │  BSPCE  │   CUT   │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │   CUT   │ SFT TAB │  UNDO   │  REDO   │   TAB   │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │ADDR BAR │   GUI   │   ALT   │  CTRL   │  SHIFT  │  COPY   ├─╯                ╰─┤  COPY   │  LEFT   │   UP    │  DOWN   │  RIGHT  │   OSS   │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │FIND+REPL│ SEL ALL │ SELLINE │ SELWORD │  FIND   │  PASTE  ││  MUTE  ││PLY/PSE ││  PASTE  │  HOME   │  P UP   │ P DOWN  │   END   │   APP   │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │  LLCK   │         │         │         ││   ESC   │ SELWORD │ SELLINE │ SEL ALL │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_CURSOR] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_ENT,   KC_SPC,   KC_TAB,   KC_BSPC,  M_CUT,                         M_CUT,    M_SFTTAB, M_UNDO,   M_REDO,   KC_TAB,
+     M_ADRBAR, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_COPY,                        M_COPY,   KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, OS_LSFT,
+     M_FNDRPL, M_SELALL, SELLINE,  SELWORD,  M_FIND,   M_PASTE,  KC_MUTE,   KC_MPLY,  M_PASTE,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   KC_APP,
+                                   QK_LLCK,  KC_TRNS,  _______,  _______,   KC_ESC,   SELWORD,  SELLINE,  M_SELALL
  ),
 
  /*
@@ -390,6 +434,9 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
                 break;
             case 1:
                 strcpy ( layer_state_str, "SYMBOLS");
+                break;
+            case 2:
+                strcpy ( layer_state_str, "CURSOR");
                 break;
             default:
                 strcpy ( layer_state_str, "XXXXXX");
@@ -635,6 +682,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [1] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
