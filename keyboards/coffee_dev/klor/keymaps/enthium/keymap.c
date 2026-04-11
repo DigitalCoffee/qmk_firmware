@@ -84,7 +84,7 @@ enum custom_keycodes {
 
 #define SYM_R LT(_SYMBOL, KC_R)
 
-// SYMBOL LAYER HOME ROW MODS ├───────────────────────────────────┐
+// OTHER LAYER HOME ROW MODS ├───────────────────────────────────┐
 
 #define SFT_BSP MT(MOD_RSFT, KC_BSPC)
 #define CTRL_TB MT(MOD_LCTL, KC_TAB)
@@ -103,6 +103,8 @@ enum custom_keycodes {
 #define M_SELALL C(KC_A)
 
 #define M_FIND C(KC_F)
+#define M_FNDNXT C(KC_G)
+#define M_FNDPRV C(S(KC_G))
 #define M_FNDRPL C(KC_H)
 
 #define M_SFTTAB S(KC_TAB)
@@ -170,44 +172,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    │ s y m b o l                                               │
    └───────────────────────────────────────────────────────────┘
              ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-             │    {    │    (    │    )    │    }    │    ?    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    .    │    +    │    &    │   INS   │    →    │
+             │    {    │    (    │    )    │    }    │    ?    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    .    │    [    │    &    │    +    │    ]    │
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │    #    │    ^    │    =    │    _    │    $    │    *    ├─╯                ╰─┤    ,    │  BSPCE  │   TAB   │  SPACE  │  ENTER  │   ESC   │
+   │    #    │    ^    │    =    │    _    │    $    │    *    ├─╯                ╰─┤    ,    │  BSPCE  │   TAB   │  SPACE  │  ENTER  │   OSS   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │    ~    │    <    │    |    │    -    │    >    │    /    ││  MUTE  ││PLY/PSE ││    ;    │    "    │    '    │    `    │   OSS   │    !    │
+   │    ~    │    <    │    |    │    -    │    >    │    /    ││  MUTE  ││PLY/PSE ││    ;    │    "    │    '    │    `    │    \    │    !    │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │    %    │    :    │    @    │    \    ││         │         │         │  LLCK   │
+                                 │    %    │    :    │    @    │    \    ││         │    →    │         │  LLCK   │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
 
    [_SYMBOL] = LAYOUT_polydactyl(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
-               KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_PLUS,  KC_AMPR,  KC_INS,   KC_ESC,
-     KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  KC_EXLM,
-     KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   ARROW,    OS_LSFT,
-                                   KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  _______,  KC_TRNS,  QK_LLCK
+               KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_LBRC,  KC_AMPR,  KC_PLUS,  KC_RBRC,
+     KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  OS_LSFT,
+     KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   KC_BSLS,  KC_EXLM,
+                                   KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  ARROW,    KC_TRNS,  QK_LLCK
  ),
 
-/*
+ /*
    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
 
    ┌───────────────────────────────────────────────────────────┐
    │ c u r s o r                                               │
    └───────────────────────────────────────────────────────────┘
              ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-             │  ENTER  │  SPACE  │   TAB   │  BSPCE  │   CUT   │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │   CUT   │ SFT TAB │  UNDO   │  REDO   │   TAB   │
+             │ADDR BAR │  REDO   │  UNDO   │FIND+REPL│   CUT   │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │   CUT   │ SFT TAB │  UNDO   │  REDO   │   TAB   │
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │ADDR BAR │   GUI   │   ALT   │  CTRL   │  SHIFT  │  COPY   ├─╯                ╰─┤  COPY   │  LEFT   │   UP    │  DOWN   │  RIGHT  │   OSS   │
+   │FIND PREV│  ENTER  │  SPACE  │   TAB   │  BSPCE  │  COPY   ├─╯                ╰─┤  COPY   │  LEFT   │   UP    │  DOWN   │  RIGHT  │   OSS   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │FIND+REPL│ SEL ALL │ SELLINE │ SELWORD │  FIND   │  PASTE  ││  MUTE  ││PLY/PSE ││  PASTE  │  HOME   │  P UP   │ P DOWN  │   END   │   APP   │
+   │FIND NEXT│ SEL ALL │ SELLINE │ SELWORD │  FIND   │  PASTE  ││  MUTE  ││PLY/PSE ││  PASTE  │  HOME   │  P UP   │ P DOWN  │   END   │   APP   │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                  │  LLCK   │         │         │         ││   ESC   │ SELWORD │ SELLINE │ SEL ALL │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
 
    [_CURSOR] = LAYOUT_polydactyl(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
-               KC_ENT,   KC_SPC,   KC_TAB,   KC_BSPC,  M_CUT,                         M_CUT,    M_SFTTAB, M_UNDO,   M_REDO,   KC_TAB,
-     M_ADRBAR, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_COPY,                        M_COPY,   KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, OS_LSFT,
-     M_FNDRPL, M_SELALL, SELLINE,  SELWORD,  M_FIND,   M_PASTE,  KC_MUTE,   KC_MPLY,  M_PASTE,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   KC_APP,
+               M_ADRBAR, M_REDO,   M_UNDO,   M_FNDRPL, M_CUT,                         M_CUT,    M_SFTTAB, M_UNDO,   M_REDO,   KC_TAB,
+     M_FNDPRV, GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  M_COPY,                        M_COPY,   KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, OS_LSFT,
+     M_FNDNXT, M_SELALL, SELLINE,  SELWORD,  M_FIND,   M_PASTE,  KC_MUTE,   KC_MPLY,  M_PASTE,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   KC_APP,
                                    QK_LLCK,  KC_TRNS,  _______,  _______,   KC_ESC,   SELWORD,  SELLINE,  M_SELALL
  ),
 
