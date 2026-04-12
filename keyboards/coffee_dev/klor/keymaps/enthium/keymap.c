@@ -40,6 +40,7 @@ enum klor_layers {
     _ALPHA,
     _SYMBOL,
     _CURSOR,
+    _NUMPAD,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -81,6 +82,7 @@ enum custom_keycodes {
 // THUMB LAYER TAPS ├───────────────────────────────────┐
 
 #define CRSR_SPC LT(_CURSOR, KC_SPC)
+#define REP_NUM LT(_NUMPAD, KC_NO)
 
 #define SYM_R LT(_SYMBOL, KC_R)
 
@@ -162,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   KC_UNDS,  CRSR_SPC, QK_REP,   KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
+                                   KC_UNDS,  CRSR_SPC, REP_NUM,  KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
 ),
 
  /*
@@ -211,6 +213,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      M_FNDPRV, GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  M_COPY,                        M_COPY,   KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, OS_LSFT,
      M_FNDNXT, M_SELALL, SELLINE,  SELWORD,  M_FIND,   M_PASTE,  KC_MUTE,   KC_MPLY,  M_PASTE,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   KC_APP,
                                    QK_LLCK,  KC_TRNS,  _______,  _______,   KC_ESC,   SELWORD,  SELLINE,  M_SELALL
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ n u m p a d                                               │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │    (    │    [    │    ]    │    )    │    ~    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    G    │    7    │    8    │    9    │    :    │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │   OSS   │  ENTER  │  SPACE  │   TAB   │  BSPCE  │    x    ├─╯                ╰─┤    k    │    1    │    2    │    3    │    -    │    +    │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │    a    │    b    │    c    │    d    │    e    │    f    ││  MUTE  ││PLY/PSE ││    j    │    4    │    5    │    6    │    /    │    *    │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │    _    │  FIND   │         │  LLCK   ││    =    │    ,    │    0    │    .    │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_NUMPAD] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_LPRN,  KC_LBRC,  KC_RBRC,  KC_RPRN,  KC_TILD,                       S(KC_G),  KC_7,     KC_8,     KC_9,     KC_COLN,
+     OS_LSFT,  GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  KC_X,                          KC_K,     KC_1,     KC_2,     KC_3,     KC_MINS,  KC_PLUS,
+     KC_A,     KC_B,     KC_C,     KC_D,     KC_E,     KC_F,     KC_MUTE,   KC_MPLY,  KC_J,     KC_4,     KC_5,     KC_6,     KC_SLSH,  KC_ASTR,
+                                   KC_UNDS,  M_FIND,   KC_TRNS,  QK_LLCK,   KC_EQL,   KC_COMM,  KC_0,     KC_DOT
  ),
 
  /*
@@ -431,14 +457,17 @@ void render_os_lock_status(void) {
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
       switch (get_highest_layer(state)) {
-            case 0:
+            case _ALPHA:
                 strcpy ( layer_state_str, "BASE ENTHIUM");
                 break;
-            case 1:
+            case _SYMBOL:
                 strcpy ( layer_state_str, "SYMBOLS");
                 break;
-            case 2:
+            case _CURSOR:
                 strcpy ( layer_state_str, "CURSOR");
+                break;
+            case _NUMPAD:
+                strcpy ( layer_state_str, "NUMPAD");
                 break;
             default:
                 strcpy ( layer_state_str, "XXXXXX");
@@ -581,7 +610,7 @@ bool oled_task_kb(void) {
 
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ M A C R O S                                                                                                                                │
+// │ P R O C E S S I N G                                                                                                                        │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
 
@@ -634,11 +663,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
 
 // ┌───────────────────────────────────────────────────────────┐
-// │ l a y e r                                                 │
-// └───────────────────────────────────────────────────────────┘
-
-
-// ┌───────────────────────────────────────────────────────────┐
 // │ q m k                                                     │
 // └───────────────────────────────────────────────────────────┘
 
@@ -671,9 +695,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case RD_HM:     SEND_STRING("hm"); break;
         }
     }
+
+    switch (keycode) {
+
+// ┌───────────────────────────────────────────────────────────┐
+// │ l a y e r                                                 │
+// └───────────────────────────────────────────────────────────┘
+
+        case REP_NUM:
+            if (record->tap.count) {
+                repeat_key_invoke(&record->event);
+                return false;
+            }
+            break;
+    }
+
     return true;
 }
 
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ R E P E A T                                                                                                                                │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
+
+bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
+                            uint8_t* remembered_mods) {
+    switch (keycode) {
+        case KC_ESC:
+        case KC_BSPC:
+        case KC_DEL:
+        case REP_NUM:
+            return false;
+    }
+    return true;
+}
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ E N C O D E R                                                                                                                              │
@@ -682,9 +737,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [1] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_ALPHA]  = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_SYMBOL] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_CURSOR] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_NUMPAD] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
