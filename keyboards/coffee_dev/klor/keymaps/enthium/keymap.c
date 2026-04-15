@@ -41,6 +41,7 @@ enum klor_layers {
     _SYMBOL,
     _CURSOR,
     _NUMPAD,
+    _SYSFN,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -48,8 +49,7 @@ enum klor_layers {
 // └───────────────────────────────────────────────────────────┘
 
 enum custom_keycodes {
-    MAKE_H = SAFE_RANGE,
-    OS_SWAP,
+    OS_SWAP = SAFE_RANGE,
     ARROW,
     RD_UE,
     RD_OA,
@@ -83,6 +83,7 @@ enum custom_keycodes {
 
 #define CRSR_SPC LT(_CURSOR, KC_SPC)
 #define REP_NUM LT(_NUMPAD, KC_NO)
+#define SYS_ESC LT(_SYSFN, KC_ESC)
 
 #define SYM_R LT(_SYMBOL, KC_R)
 
@@ -112,6 +113,10 @@ enum custom_keycodes {
 #define M_SFTTAB S(KC_TAB)
 
 #define M_ADRBAR C(KC_L)
+
+#define M_LOCK G(KC_L)
+
+#define M_CA_DEL A(C(KC_DEL))
 
 #include "g/keymap_combo.h"
 
@@ -164,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   KC_UNDS,  CRSR_SPC, REP_NUM,  KC_ESC,    KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
+                                   KC_UNDS,  CRSR_SPC, REP_NUM,  SYS_ESC,   KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
 ),
 
  /*
@@ -238,6 +243,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_A,     KC_B,     KC_C,     KC_D,     KC_E,     KC_F,     KC_MUTE,   KC_MPLY,  KC_J,     KC_4,     KC_5,     KC_6,     KC_SLSH,  KC_ASTR,
                                    KC_UNDS,  M_FIND,   KC_TRNS,  QK_LLCK,   KC_EQL,   KC_COMM,  KC_0,     KC_DOT
  ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ s y s t e m   /   f n u m                                 │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │  POWER  │  WAKE   │  SLEEP  │ C+A+DEL │  MAKE   │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │SCRL LOCK│   F7    │   F8    │   F9    │   F12   │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │   OSS   │  LGUI   │  LALT   │  LCTRL  │  LSHFT  │  LOCK   ├─╯                ╰─┤CAPS LOCK│   F1    │   F2    │   F3    │   F10   │BRIGHT UP│
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │STOPDMREC│REC DM 2 │REC DM 1 │PLAY DM 2│PLAY DM 1│ OS SWAP ││  MUTE  ││PLY/PSE ││NUM LOCK │   F4    │   F5    │   F6    │   F11   │BRIGHT DN│
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │         │         │  LLCK   │         ││         │  PAUSE  │PRINTSCRN│KEY LOCK │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_SYSFN] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_PWR,   KC_WAKE,  KC_SLEP,  M_CA_DEL, QK_MAKE,                       KC_SCRL,  KC_F7,    KC_F8,    KC_F9,    KC_F12,
+     OS_LSFT,  KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_LOCK,                        KC_CAPS,  KC_F1,    KC_F2,    KC_F3,    KC_F10,  KC_BRIU,
+     DM_RSTP,  DM_REC2,  DM_REC1,  DM_PLY2,  DM_PLY1,  OS_SWAP,  KC_MUTE,   KC_MPLY,  KC_NUM,   KC_F4,    KC_F5,    KC_F6,    KC_F11,  KC_BRID,
+                                   _______,  _______,  QK_LLCK,  _______,   _______,  KC_PAUS,  KC_PSCR,  QK_LOCK
+ )
+
 
  /*
    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
@@ -469,6 +499,9 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
             case _NUMPAD:
                 strcpy ( layer_state_str, "NUMPAD");
                 break;
+            case _SYSFN:
+                strcpy ( layer_state_str, "SYSTEM / FNUM");
+                break;
             default:
                 strcpy ( layer_state_str, "XXXXXX");
         }
@@ -663,15 +696,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
 
 // ┌───────────────────────────────────────────────────────────┐
-// │ q m k                                                     │
-// └───────────────────────────────────────────────────────────┘
-
-            case MAKE_H:
-                SEND_STRING ("qmk compile -kb coffee_dev/klor -km enthium");
-                tap_code(KC_ENTER);
-                break;
-
-// ┌───────────────────────────────────────────────────────────┐
 // │ p r o d u c t i v i t y                                   │
 // └───────────────────────────────────────────────────────────┘
 
@@ -741,6 +765,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_SYMBOL] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_CURSOR] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_NUMPAD] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_SYSFN]  = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
