@@ -25,6 +25,8 @@ for more options.
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 
+#define TAP_CODE_DELAY 5
+
 #define TAPPING_TERM 170
 // #define TAPPING_TERM 300
 
@@ -36,6 +38,7 @@ for more options.
 #define PERMISSIVE_HOLD
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD
+#define QUICK_TAP_TERM_PER_KEY
 
 #define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 // Holding Shift while Caps Word is active inverts the shift state.

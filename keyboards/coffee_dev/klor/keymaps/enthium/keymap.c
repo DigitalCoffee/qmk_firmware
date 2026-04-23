@@ -42,6 +42,7 @@ enum klor_layers {
     _CURSOR,
     _NUMPAD,
     _SYSFN,
+    _GUI,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -50,6 +51,8 @@ enum klor_layers {
 
 enum custom_keycodes {
     OS_SWAP = SAFE_RANGE,
+    SW_APP,
+    SW_WIN,
     ARROW,
     RD_UE,
     RD_OA,
@@ -81,6 +84,7 @@ enum custom_keycodes {
 
 // THUMB LAYER TAPS ├───────────────────────────────────┐
 
+#define GUI_UNDS LT(_GUI, KC_NO)
 #define CRSR_SPC LT(_CURSOR, KC_SPC)
 #define REP_NUM LT(_NUMPAD, KC_NO)
 #define SYS_ESC LT(_SYSFN, KC_ESC)
@@ -118,6 +122,38 @@ enum custom_keycodes {
 
 #define M_CA_DEL A(C(KC_DEL))
 
+#define M_GUI_1 G(KC_1)
+#define M_GUI_2 G(KC_2)
+#define M_GUI_3 G(KC_3)
+#define M_GUI_4 G(KC_4)
+#define M_GUI_5 G(KC_5)
+#define M_GUI_6 G(KC_6)
+#define M_GUI_7 G(KC_7)
+#define M_GUI_8 G(KC_8)
+#define M_GUI_9 G(KC_9)
+
+#define M_G_UP   G(KC_UP)
+#define M_G_DOWN G(KC_DOWN)
+#define M_G_LEFT G(KC_LEFT)
+#define M_G_RGHT G(KC_RIGHT)
+
+#define M_SGUP   LSG(KC_UP)
+#define M_SGDOWN LSG(KC_DOWN)
+#define M_SGLEFT LSG(KC_LEFT)
+#define M_SGRGHT LSG(KC_RIGHT)
+
+#define M_CALEFT LCA(KC_LEFT)
+#define M_CARGHT LCA(KC_RIGHT)
+
+#define M_SCALFT S(LCA(KC_LEFT))
+#define M_SCARGT S(LCA(KC_RIGHT))
+
+#define M_ALTTAB A(KC_TAB)
+#define M_GUITAB G(KC_TAB)
+#define M_ALT_F4 A(KC_F4)
+
+#define M_CA_TAB LCA(KC_TAB)
+
 #include "g/keymap_combo.h"
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -131,6 +167,13 @@ enum custom_keycodes {
   float winxp_song[][2] = SONG(WINXP_SOUND);
   float mac_song[][2] = SONG(MAC_SOUND);
 #endif // AUDIO_ENABLE
+
+// ┌───────────────────────────────────────────────────────────┐
+// │ d e f i n e   v a r i a b l e s                           │
+// └───────────────────────────────────────────────────────────┘
+
+bool sw_app_active = false;
+bool sw_win_active = false;
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ K E Y M A P S                                                                                                                              │
@@ -169,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   KC_UNDS,  CRSR_SPC, REP_NUM,  SYS_ESC,   KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
+                                   GUI_UNDS, CRSR_SPC, REP_NUM,  SYS_ESC,   KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
 ),
 
  /*
@@ -263,10 +306,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_SYSFN] = LAYOUT_polydactyl(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
                KC_PWR,   KC_WAKE,  KC_SLEP,  M_CA_DEL, QK_MAKE,                       KC_SCRL,  KC_F7,    KC_F8,    KC_F9,    KC_F12,
-     OS_LSFT,  KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_LOCK,                        KC_CAPS,  KC_F1,    KC_F2,    KC_F3,    KC_F10,  KC_BRIU,
-     DM_RSTP,  DM_REC2,  DM_REC1,  DM_PLY2,  DM_PLY1,  OS_SWAP,  KC_MUTE,   KC_MPLY,  KC_NUM,   KC_F4,    KC_F5,    KC_F6,    KC_F11,  KC_BRID,
+     OS_LSFT,  KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_LOCK,                        KC_CAPS,  KC_F1,    KC_F2,    KC_F3,    KC_F10,   KC_BRIU,
+     DM_RSTP,  DM_REC2,  DM_REC1,  DM_PLY2,  DM_PLY1,  OS_SWAP,  KC_MUTE,   KC_MPLY,  KC_NUM,   KC_F4,    KC_F5,    KC_F6,    KC_F11,   KC_BRID,
                                    _______,  _______,  QK_LLCK,  _______,   _______,  KC_PAUS,  KC_PSCR,  QK_LOCK
- )
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ g u i                                                     │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │<MVWIN2WS│< WRKSPCE│WRKSPCE >│MVWIN2WS>│ GUI+TAB │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │ SW WIN  │  GUI+7  │  GUI+8  │  GUI+9  │SYS CTRL │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │   OSS   │  ENTER  │  SPACE  │   TAB   │  BSPCE  │ ALT+TAB ├─╯                ╰─┤ SW APP  │  GUI+1  │  GUI+2  │  GUI+3  │WINDOW ^ │MONITOR ^│
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │   F11   │  LEFT   │  DOWN   │   UP    │  RIGHT  │PRINTSCRN││  MUTE  ││PLY/PSE ││ ALT+F4  │  GUI+4  │  GUI+5  │  GUI+6  │WINDOW v │MONITOR v│
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │         │  LLCK   │         │         ││< MONITOR│< WINDOW │WINDOW > │MONITOR >│
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_GUI] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               M_SCALFT, M_CALEFT, M_CARGHT, M_SCARGT, M_GUITAB,                      SW_WIN,   M_GUI_7,  M_GUI_8,  M_GUI_9,  M_CA_TAB,
+     OS_LSFT,  GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  M_ALTTAB,                      SW_APP,   M_GUI_1,  M_GUI_2,  M_GUI_3,  M_G_UP,   M_SGUP,
+     KC_F11,   KC_LEFT,  KC_DOWN,  KC_UP,    KC_RIGHT, KC_PSCR,  KC_MUTE,   KC_MPLY,  M_ALT_F4, M_GUI_4,  M_GUI_5,  M_GUI_6,  M_G_DOWN, M_SGDOWN,
+                                   _______,  QK_LLCK,  _______,  _______,   M_SGLEFT, M_G_LEFT, M_G_RGHT, M_SGRGHT
+ ),
 
 
  /*
@@ -486,29 +553,40 @@ void render_os_lock_status(void) {
 // layer status ──────────────────────────────────────────┐
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
-      switch (get_highest_layer(state)) {
-            case _ALPHA:
-                strcpy ( layer_state_str, "BASE ENTHIUM");
-                break;
-            case _SYMBOL:
-                strcpy ( layer_state_str, "SYMBOLS");
-                break;
-            case _CURSOR:
-                strcpy ( layer_state_str, "CURSOR");
-                break;
-            case _NUMPAD:
-                strcpy ( layer_state_str, "NUMPAD");
-                break;
-            case _SYSFN:
-                strcpy ( layer_state_str, "SYSTEM / FNUM");
-                break;
-            default:
-                strcpy ( layer_state_str, "XXXXXX");
-        }
-      if (dmacro_num < 1) {
-          strcpy ( o_text, layer_state_str );
+    switch (get_highest_layer(state)) {
+        case _ALPHA:
+            strcpy ( layer_state_str, "BASE ENTHIUM");
+            break;
+        case _SYMBOL:
+            strcpy ( layer_state_str, "SYMBOLS");
+            break;
+        case _CURSOR:
+            strcpy ( layer_state_str, "CURSOR");
+            break;
+        case _NUMPAD:
+            strcpy ( layer_state_str, "NUMPAD");
+            break;
+        case _SYSFN:
+            strcpy ( layer_state_str, "SYSTEM / FNUM");
+            break;
+        case _GUI:
+            strcpy ( layer_state_str, "GUI");
+            break;
+        default:
+            strcpy ( layer_state_str, "XXXXXX");
     }
-  return state;
+    if (dmacro_num < 1) {
+        strcpy ( o_text, layer_state_str );
+    }
+    if (sw_app_active) {
+        unregister_mods(MOD_MASK_ALT);
+        sw_app_active = false;
+    }
+    if (sw_win_active) {
+        unregister_mods(MOD_MASK_GUI);
+        sw_win_active = false;
+    }
+    return state;
 }
 
 
@@ -647,6 +725,29 @@ bool oled_task_kb(void) {
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
 
+bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case KC_UP:
+            case KC_DOWN:
+            case KC_LEFT:
+            case KC_RIGHT:
+            case SFT_BSP:
+                break;
+            default:
+                if (sw_app_active && keycode != SW_APP) {
+                    unregister_mods(MOD_MASK_ALT);
+                    sw_app_active = false;
+                }
+                if (sw_win_active && keycode != SW_WIN) {
+                    unregister_mods(MOD_MASK_GUI);
+                    sw_win_active = false;
+                }
+        }
+    }
+    return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     const uint8_t mods = get_mods();
     const uint8_t all_mods = (mods | get_weak_mods()
@@ -695,15 +796,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                                             : "\xe2\x86\x92"));  // ->
                 return false;
 
-// ┌───────────────────────────────────────────────────────────┐
-// │ p r o d u c t i v i t y                                   │
-// └───────────────────────────────────────────────────────────┘
+            case SW_APP:
+                add_mods(MOD_MASK_ALT);
+                sw_app_active = true;
+                tap_code(KC_TAB);
+                return false;
 
-            case KC_MPLY:
-//              #ifdef HAPTIC_ENABLE
-//                      drv2605l_pulse(4);
-//              #endif // HAPTIC_ENABLE
-                break;
+            case SW_WIN:
+                add_mods(MOD_MASK_GUI);
+                sw_win_active = true;
+                tap_code(KC_GRV);
+                return false;
 
 // ┌───────────────────────────────────────────────────────────┐
 // │ r a k e d o w n  &  s l i d e                             │
@@ -725,6 +828,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // ┌───────────────────────────────────────────────────────────┐
 // │ l a y e r                                                 │
 // └───────────────────────────────────────────────────────────┘
+
+        case GUI_UNDS:
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_UNDS);
+                return false;
+            }
+            break;
 
         case REP_NUM:
             if (record->tap.count) {
@@ -748,6 +858,7 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_ESC:
         case KC_BSPC:
         case KC_DEL:
+        case GUI_UNDS:
         case REP_NUM:
             return false;
     }
@@ -766,6 +877,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_CURSOR] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_NUMPAD] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_SYSFN]  = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_GUI]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
