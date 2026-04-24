@@ -160,6 +160,8 @@ enum custom_keycodes {
 
 #define M_CA_TAB LCA(KC_TAB)
 
+// USE COMBO DICTIONARY ├───────────────────────────────────┐
+
 #include "g/keymap_combo.h"
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -606,9 +608,8 @@ void render_os_lock_status(void) {
 // layer status ──────────────────────────────────────────┐
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
-    uint8_t current_layer = get_highest_layer(state);
-
-    switch (current_layer) {
+    state = layer_state_set_user(state);
+    switch (get_highest_layer(state)) {
         case _ALPHA:
             strcpy ( layer_state_str, "BASE ENTHIUM");
             break;
@@ -636,21 +637,8 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
         default:
             strcpy ( layer_state_str, "XXXXXX");
     }
-    if (current_layer == _GAME || current_layer == _GAME_ALT){
-        combo_disable();
-    } else {
-        combo_enable();
-    }
     if (dmacro_num < 1) {
         strcpy ( o_text, layer_state_str );
-    }
-    if (sw_app_active) {
-        unregister_mods(MOD_MASK_ALT);
-        sw_app_active = false;
-    }
-    if (sw_win_active) {
-        unregister_mods(MOD_MASK_GUI);
-        sw_win_active = false;
     }
     return state;
 }
@@ -790,6 +778,27 @@ bool oled_task_kb(void) {
 // │ P R O C E S S I N G                                                                                                                        │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (IS_LAYER_ON_STATE(state, _GAME) || IS_LAYER_ON_STATE(state, _GAME_ALT)){
+        combo_disable();
+        sentence_case_off();
+        socd_cleaner_enabled = true;
+    } else {
+        combo_enable();
+        sentence_case_on();
+        socd_cleaner_enabled = false;
+    }
+    if (sw_app_active) {
+        unregister_mods(MOD_MASK_ALT);
+        sw_app_active = false;
+    }
+    if (sw_win_active) {
+        unregister_mods(MOD_MASK_GUI);
+        sw_win_active = false;
+    }
+    return state;
+}
 
 bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
@@ -948,6 +957,18 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_GAME_ALT] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ S O C D                                                                                                                                    │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
+
+socd_cleaner_t socd_opposing_pairs[] = {
+  {{KC_W, KC_S}, SOCD_CLEANER_LAST},
+  {{KC_A, KC_D}, SOCD_CLEANER_LAST},
+  {{KC_UP, KC_DOWN}, SOCD_CLEANER_LAST},
+  {{KC_LEFT, KC_RIGHT}, SOCD_CLEANER_LAST},
+};
 /*
 
                                                        ▐█    ▟▛ ▐█     ▄▆▀▀▀▀▀▀▆▄  ▐█▀▀▀▀▀█▌
