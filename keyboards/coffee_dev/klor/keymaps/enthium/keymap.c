@@ -43,6 +43,8 @@ enum klor_layers {
     _NUMPAD,
     _SYSFN,
     _GUI,
+    _GAME,
+    _GAME_ALT,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -91,6 +93,8 @@ enum custom_keycodes {
 
 #define SYM_R LT(_SYMBOL, KC_R)
 
+#define GALT_ENT LT(_GAME_ALT, KC_ENTER)
+
 // OTHER LAYER HOME ROW MODS ├───────────────────────────────────┐
 
 #define SFT_BSP MT(MOD_RSFT, KC_BSPC)
@@ -99,6 +103,8 @@ enum custom_keycodes {
 #define GUI_ENT MT(MOD_LGUI, KC_ENT)
 
 // OTHER MACROS ├───────────────────────────────────┐
+
+#define BASE_LYR TO(_ALPHA)
 
 #define M_CUT C(KC_X)
 #define M_COPY C(KC_C)
@@ -236,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_LCBR,  KC_LPRN,  KC_RPRN,  KC_RCBR,  KC_QUES,                       KC_DOT,   KC_LBRC,  KC_AMPR,  KC_PLUS,  KC_RBRC,
      KC_HASH,  KC_CIRC,  KC_EQL,   KC_UNDS,  KC_DLR,   KC_ASTR,                       KC_COMM,  SFT_BSP,  CTRL_TB,  ALT_SPC,  GUI_ENT,  OS_LSFT,
      KC_TILD,  KC_LT,    KC_PIPE,  KC_MINS,  KC_GT,    KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_SCLN,  KC_DQT,   KC_QUOT,  KC_GRV,   KC_BSLS,  KC_EXLM,
-                                   KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  ARROW,    KC_TRNS,  QK_LLCK
+                                   KC_PERC,  KC_COLN,  KC_AT,    KC_BSLS,   _______,  ARROW,    _______,  QK_LLCK
  ),
 
  /*
@@ -250,7 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
    │FIND PREV│  ENTER  │  SPACE  │   TAB   │  BSPCE  │  COPY   ├─╯                ╰─┤  COPY   │  LEFT   │   UP    │  DOWN   │  RIGHT  │   OSS   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │FIND NEXT│ SEL ALL │ SELLINE │ SELWORD │  FIND   │  PASTE  ││  MUTE  ││PLY/PSE ││  PASTE  │  HOME   │  P UP   │ P DOWN  │   END   │   APP   │
+   │FIND NEXT│ SEL ALL │ SELLINE │ SELWORD │  FIND   │  PASTE  ││  MUTE  ││PLY/PSE ││  PASTE  │  HOME   │  PG UP  │ PG DOWN │   END   │   APP   │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                  │  LLCK   │         │         │         ││   ESC   │ SELWORD │ SELLINE │ SEL ALL │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
@@ -260,7 +266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                M_ADRBAR, M_REDO,   M_UNDO,   M_FNDRPL, M_CUT,                         M_CUT,    M_SFTTAB, M_UNDO,   M_REDO,   KC_TAB,
      M_FNDPRV, GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  M_COPY,                        M_COPY,   KC_LEFT,  KC_UP,    KC_DOWN,  KC_RIGHT, OS_LSFT,
      M_FNDNXT, M_SELALL, SELLINE,  SELWORD,  M_FIND,   M_PASTE,  KC_MUTE,   KC_MPLY,  M_PASTE,  KC_HOME,  KC_PGUP,  KC_PGDN,  KC_END,   KC_APP,
-                                   QK_LLCK,  KC_TRNS,  _______,  _______,   KC_ESC,   SELWORD,  SELLINE,  M_SELALL
+                                   QK_LLCK,  _______,  _______,  _______,   KC_ESC,   SELWORD,  SELLINE,  M_SELALL
  ),
 
  /*
@@ -284,7 +290,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_LPRN,  KC_LBRC,  KC_RBRC,  KC_RPRN,  KC_TILD,                       S(KC_G),  KC_7,     KC_8,     KC_9,     KC_COLN,
      OS_LSFT,  GUI_ENT,  ALT_SPC,  CTRL_TB,  SFT_BSP,  KC_X,                          KC_K,     KC_1,     KC_2,     KC_3,     KC_MINS,  KC_PLUS,
      KC_A,     KC_B,     KC_C,     KC_D,     KC_E,     KC_F,     KC_MUTE,   KC_MPLY,  KC_J,     KC_4,     KC_5,     KC_6,     KC_SLSH,  KC_ASTR,
-                                   KC_UNDS,  M_FIND,   KC_TRNS,  QK_LLCK,   KC_EQL,   KC_COMM,  KC_0,     KC_DOT
+                                   KC_UNDS,  M_FIND,   _______,  QK_LLCK,   KC_EQL,   KC_COMM,  KC_0,     KC_DOT
  ),
 
  /*
@@ -300,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
    │STOPDMREC│REC DM 2 │REC DM 1 │PLAY DM 2│PLAY DM 1│ OS SWAP ││  MUTE  ││PLY/PSE ││NUM LOCK │   F4    │   F5    │   F6    │   F11   │BRIGHT DN│
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │         │         │  LLCK   │         ││         │  PAUSE  │PRINTSCRN│KEY LOCK │
+                                 │         │         │  LLCK   │         ││GAME LAYR│  PAUSE  │PRINTSCRN│KEY LOCK │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
 
    [_SYSFN] = LAYOUT_polydactyl(
@@ -308,7 +314,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_PWR,   KC_WAKE,  KC_SLEP,  M_CA_DEL, QK_MAKE,                       KC_SCRL,  KC_F7,    KC_F8,    KC_F9,    KC_F12,
      OS_LSFT,  KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  M_LOCK,                        KC_CAPS,  KC_F1,    KC_F2,    KC_F3,    KC_F10,   KC_BRIU,
      DM_RSTP,  DM_REC2,  DM_REC1,  DM_PLY2,  DM_PLY1,  OS_SWAP,  KC_MUTE,   KC_MPLY,  KC_NUM,   KC_F4,    KC_F5,    KC_F6,    KC_F11,   KC_BRID,
-                                   _______,  _______,  QK_LLCK,  _______,   _______,  KC_PAUS,  KC_PSCR,  QK_LOCK
+                                   _______,  _______,  QK_LLCK,  _______,   TO(_GAME),KC_PAUS,  KC_PSCR,  QK_LOCK
  ),
 
  /*
@@ -335,6 +341,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                    _______,  QK_LLCK,  _______,  _______,   M_SGLEFT, M_G_LEFT, M_G_RGHT, M_SGRGHT
  ),
 
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ g a m i n g                                               │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │   TAB   │    Q    │    W    │    E    │    R    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    Y    │    U    │    I    │    O    │    P    │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │    G    │  SHIFT  │    A    │    S    │    D    │    F    ├─╯                ╰─┤    H    │    J    │    K    │    L    │    ;    │    '    │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │    B    │  CTRL   │    Z    │    X    │    C    │    V    ││  MUTE  ││PLY/PSE ││    N    │    M    │    ,    │    .    │    /    │    \    │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │  LALT   │  SPACE  │  ENTER  │   ESC   ││BASE LAYR│  BSPCE  │    T    │   DEL   │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_GAME] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,                          KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
+     KC_G,     KC_LSFT,  KC_A,     KC_S,     KC_D,     KC_F,                          KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,
+     KC_B,     KC_LCTL,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_MUTE,   KC_MPLY,  KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_BSLS,
+                                   KC_LALT,  KC_SPC,   GALT_ENT, KC_ESC,    BASE_LYR, KC_BSPC,  KC_T,     KC_DEL
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ g a m i n g   a l t                                       │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │         │    9    │    8    │    7    │    =    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │   F2    │   F1    │   UP    │   F4    │   F5    │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │  PG UP  │         │    3    │    2    │    1    │  SPACE  ├─╯                ╰─┤   F3    │  LEFT   │  DOWN   │  RIGHT  │   F6    │   F11   │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │ PG DOWN │         │    6    │    5    │    4    │    -    ││  MUTE  ││PLY/PSE ││    `    │   F7    │   F8    │   F9    │   F10   │   F12   │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │         │         │         │  LLCK   ││  HOME   │  ENTER  │    0    │   END   │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_GAME_ALT] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               _______,  KC_9,     KC_8,     KC_7,     KC_EQL,                        KC_F2,    KC_F1,    KC_UP,    KC_F4,    KC_F5,
+     KC_PGUP,  _______,  KC_3,     KC_2,     KC_1,     KC_SPC,                        KC_F3,    KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_F6,    KC_F11,
+     KC_PGDN,  _______,  KC_6,     KC_5,     KC_4,     KC_MINS,  KC_MUTE,   KC_MPLY,  KC_GRV,   KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F12,
+                                   _______,  _______,  _______,  QK_LLCK,   KC_HOME,  KC_ENT,   KC_0,     KC_END
+ ),
 
  /*
    ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
@@ -553,7 +606,9 @@ void render_os_lock_status(void) {
 // layer status ──────────────────────────────────────────┐
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
-    switch (get_highest_layer(state)) {
+    uint8_t current_layer = get_highest_layer(state);
+
+    switch (current_layer) {
         case _ALPHA:
             strcpy ( layer_state_str, "BASE ENTHIUM");
             break;
@@ -572,8 +627,19 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
         case _GUI:
             strcpy ( layer_state_str, "GUI");
             break;
+        case _GAME:
+            strcpy ( layer_state_str, "GAMING");
+            break;
+        case _GAME_ALT:
+            strcpy ( layer_state_str, "GAMING ALT");
+            break;
         default:
             strcpy ( layer_state_str, "XXXXXX");
+    }
+    if (current_layer == _GAME || current_layer == _GAME_ALT){
+        combo_disable();
+    } else {
+        combo_enable();
     }
     if (dmacro_num < 1) {
         strcpy ( o_text, layer_state_str );
@@ -872,12 +938,14 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_ALPHA]  = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [_SYMBOL] = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [_CURSOR] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [_NUMPAD] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [_SYSFN]  = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [_GUI]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_ALPHA]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_SYMBOL]   = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),          ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_CURSOR]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_NUMPAD]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_SYSFN]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_GUI]      = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_GAME]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_GAME_ALT] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 /*
