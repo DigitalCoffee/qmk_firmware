@@ -28,3 +28,6 @@
 [submodule "modules/getreuer"]
 	path = modules/getreuer
 	url = https://github.com/getreuer/qmk-modules.git
+[submodule "modules/DigitalCoffee"]
+	path = modules/DigitalCoffee
+	url = https://github.com/DigitalCoffee/qmk_modules.git
