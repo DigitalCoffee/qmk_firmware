@@ -1,5 +1,6 @@
 {
     "modules": [
+        "DigitalCoffee/arcane",
         "DigitalCoffee/quick_brackets",
         "getreuer/select_word",
         "getreuer/sentence_case",

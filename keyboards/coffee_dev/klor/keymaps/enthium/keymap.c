@@ -88,7 +88,7 @@ enum custom_keycodes {
 
 #define GUI_UNDS LT(_GUI, KC_NO)
 #define CRSR_SPC LT(_CURSOR, KC_SPC)
-#define REP_NUM LT(_NUMPAD, KC_NO)
+#define NUM_ARCL LT(_NUMPAD, KC_NO)
 #define SYS_ESC LT(_SYSFN, KC_ESC)
 
 #define SYM_R LT(_SYMBOL, KC_R)
@@ -220,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
      KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
-                                   GUI_UNDS, CRSR_SPC, REP_NUM,  SYS_ESC,   KC_BSPC,  QK_AREP,  SYM_R,    OS_LSFT
+                                   GUI_UNDS, CRSR_SPC, NUM_ARCL, SYS_ESC,   KC_BSPC,  ARC_R,    SYM_R,    OS_LSFT
 ),
 
  /*
@@ -911,9 +911,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case REP_NUM:
+        case NUM_ARCL:
             if (record->tap.count) {
-                repeat_key_invoke(&record->event);
+                process_record_arcane(ARC_L, record);
                 return false;
             }
             break;
@@ -934,10 +934,10 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_BSPC:
         case KC_DEL:
         case GUI_UNDS:
-        case REP_NUM:
+        case NUM_ARCL:
             return false;
     }
-    return true;
+    return remember_last_key_arcane(keycode, record, remembered_mods);
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
