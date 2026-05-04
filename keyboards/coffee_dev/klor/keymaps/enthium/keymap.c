@@ -64,6 +64,7 @@ enum custom_keycodes {
     SD_SW,
     RD_ADOT,
     RD_HM,
+    RD_TG,
     COMB_ARC_SPC,
     COMB_ARC_R,
 };
@@ -897,6 +898,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case SD_SW:     SEND_STRING("sw"); break;
             case RD_ADOT:   SEND_STRING("a."); break;
             case RD_HM:     SEND_STRING("hm"); break;
+            case RD_TG:     SEND_STRING("tg"); break;
         }
     }
 
@@ -966,6 +968,25 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
             return false;
     }
     return remember_last_key_arcane(keycode, record, remembered_mods);
+}
+
+char get_last_hand_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        case RD_UE:
+        case RD_OA:
+        case RD_YI:
+        case SD_EDASH:
+        case RD_ADOT:
+        case COMB_ARC_SPC:
+            return 'L';
+        case RD_NF:
+        case SD_SW:
+        case RD_HM:
+        case RD_TG:
+        case COMB_ARC_R:
+            return 'R';
+    }
+    return '*';
 }
 
 void process_arcane_same_hand(uint16_t keycode, keyrecord_t* record) {
