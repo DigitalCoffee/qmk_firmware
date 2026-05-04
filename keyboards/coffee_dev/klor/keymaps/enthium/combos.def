@@ -13,6 +13,10 @@ COMB(SLIDE_SW, SD_SW, GUI_S, KC_W)
 COMB(RAKEDOWN_ADOT, RD_ADOT, CTRL_A, KC_DOT)
 COMB(RAKEDOWN_HM, RD_HM, SFT_H, KC_M)
 
+// ARCANE COMBOS ├───────────────────────────────────┐
+
+COMB(SPACE_ARCANE, COMB_ARC_SPC, CRSR_SPC, NUM_ARCL)
+COMB(R_ARCANE, COMB_ARC_R, ARC_R, SYM_R)
 
 // ALPHA LAYER COMBOS ├───────────────────────────────────┐
 

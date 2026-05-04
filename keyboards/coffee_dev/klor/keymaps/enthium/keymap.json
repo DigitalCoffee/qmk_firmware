@@ -2,6 +2,7 @@
     "modules": [
         "DigitalCoffee/arcane",
         "DigitalCoffee/quick_brackets",
+        "DigitalCoffee/skip_magic",
         "getreuer/select_word",
         "getreuer/sentence_case",
         "getreuer/socd_cleaner"

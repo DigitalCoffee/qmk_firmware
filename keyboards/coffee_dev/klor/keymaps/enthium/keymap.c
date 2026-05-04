@@ -64,6 +64,8 @@ enum custom_keycodes {
     SD_SW,
     RD_ADOT,
     RD_HM,
+    COMB_ARC_SPC,
+    COMB_ARC_R,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -917,13 +919,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
+
+// ┌───────────────────────────────────────────────────────────┐
+// │ a r c a n e   c o m b o s                                 │
+// └───────────────────────────────────────────────────────────┘
+
+        case COMB_ARC_SPC:
+            process_record_arcane(ARC_L, record);
+            if (record->event.pressed) {
+                tap_code(KC_SPC);
+            } else {
+                set_last_keycode(CRSR_SPC);
+            }
+            return false;
+        case COMB_ARC_R:
+            process_record_arcane(ARC_R, record);
+            if (record->event.pressed) {
+                tap_code(KC_R);
+            } else {
+                set_last_keycode(SYM_R);
+            }
+            return false;
     }
 
     return true;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ R E P E A T                                                                                                                                │
+// │ A R C A N E                                                                                                                                │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 // ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
 
@@ -933,11 +956,73 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_ESC:
         case KC_BSPC:
         case KC_DEL:
+        case KC_MUTE:
+        case KC_MPLY:
+        case SKP_MGC:
         case GUI_UNDS:
         case NUM_ARCL:
+        case COMB_ARC_SPC:
+        case COMB_ARC_R:
             return false;
     }
     return remember_last_key_arcane(keycode, record, remembered_mods);
+}
+
+void process_arcane_same_hand(uint16_t keycode, keyrecord_t* record) {
+    uint16_t last_keycode = get_last_keycode();
+
+    switch (last_keycode) {
+        case CTRL_A: set_last_keycode(KC_O); break;
+        case SFT_E: set_last_keycode(KC_U); break;
+        case SFT_H: set_last_keycode(KC_L); break;
+        case KC_J: set_last_keycode(KC_K); break;
+        case KC_K: set_last_keycode(KC_L); break;
+        case KC_Q: if (record->event.pressed) { SEND_STRING("ua"); return; }
+        case KC_V: set_last_keycode(KC_S); break;
+        case KC_W: set_last_keycode(KC_S); break;
+        case KC_X: set_last_keycode(KC_H); break;
+        case KC_Y: set_last_keycode(KC_QUOT); break;
+
+        case CRSR_SPC: if (record->event.pressed) { SEND_STRING("the "); return; }
+    }
+    repeat_key_invoke(&record->event);
+    set_last_keycode(last_keycode);
+}
+
+void process_arcane_opposite_hand(uint16_t keycode, keyrecord_t* record) {
+  skip_magic_invoke(&record->event);
+}
+
+uint16_t get_skip_magic_keycode_user(uint16_t keycode, uint8_t mods) {
+    switch (keycode) {
+        case CTRL_A: return KC_O;
+        case KC_B: return KC_C;
+        case GUI_C: return KC_B;
+        case KC_D: return KC_T;
+//      case SFT_E:
+        case KC_F: return KC_N;
+        case KC_G: return KC_T;
+        case SFT_H: return KC_L;
+//      case ALT_I:
+        case KC_J: return KC_K;
+        case KC_K: return KC_L;
+        case KC_L: return KC_M;
+        case KC_M: return KC_L;
+//      case ALT_N:
+        case KC_O: return KC_I;
+        case KC_P: return KC_N;
+        case KC_Q: return KC_I;
+//      case SYM_R:
+//      case GUI_S:
+        case CTRL_T: return KC_D;
+        case KC_U: return KC_E;
+        case KC_V: return KC_S;
+        case KC_W: return KC_S;
+        case KC_X: return KC_M;
+        case KC_Y: return KC_I;
+        case KC_Z: return KC_S;
+    }
+    return KC_TRNS;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
