@@ -928,19 +928,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case COMB_ARC_SPC:
             process_record_arcane(ARC_L, record);
-            if (record->event.pressed) {
-                tap_code(KC_SPC);
-            } else {
-                set_last_keycode(CRSR_SPC);
-            }
+            record->keycode = KC_SPC;
+            process_record(record);
+            remember_last_key_arcane(keycode, record, &all_mods);
             return false;
         case COMB_ARC_R:
             process_record_arcane(ARC_R, record);
-            if (record->event.pressed) {
-                tap_code(KC_R);
-            } else {
-                set_last_keycode(SYM_R);
-            }
+            record->keycode = KC_R;
+            process_record(record);
+            remember_last_key_arcane(keycode, record, &all_mods);
             return false;
     }
 
@@ -999,11 +995,14 @@ void process_arcane_same_hand(uint16_t keycode, keyrecord_t* record) {
         case KC_J: set_last_keycode(KC_K); break;
         case KC_K: set_last_keycode(KC_L); break;
         case KC_Q: if (record->event.pressed) { SEND_STRING("ua"); return; }
+        case KC_R:
+        case SYM_R: if (record->event.pressed) { SEND_STRING("ing"); return; }
         case KC_V: set_last_keycode(KC_S); break;
         case KC_W: set_last_keycode(KC_S); break;
         case KC_X: set_last_keycode(KC_H); break;
         case KC_Y: set_last_keycode(KC_QUOT); break;
 
+        case KC_SPC:
         case CRSR_SPC: if (record->event.pressed) { SEND_STRING("the "); return; }
     }
     repeat_key_invoke(&record->event);
