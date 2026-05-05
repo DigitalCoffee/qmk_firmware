@@ -45,6 +45,7 @@ enum klor_layers {
     _GUI,
     _GAME,
     _GAME_ALT,
+    _TYPING,
 };
 
 // ┌───────────────────────────────────────────────────────────┐
@@ -215,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
    │   TAB   │    '    │    ,    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │    _    │  SPACE  │   REP   │   ESC   ││  BSPCE  │ ALT REP │    R    │   OSS   │
+                                 │    _    │  SPACE  │ARCANE L │   ESC   ││  BSPCE  │ARCANE R │    R    │   OSS   │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
 
    [_ALPHA] = LAYOUT_polydactyl(
@@ -392,6 +393,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_PGUP,  _______,  KC_3,     KC_2,     KC_1,     KC_SPC,                        KC_F3,    KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_F6,    KC_F11,
      KC_PGDN,  _______,  KC_6,     KC_5,     KC_4,     KC_MINS,  KC_MUTE,   KC_MPLY,  KC_GRV,   KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F12,
                                    _______,  _______,  _______,  QK_LLCK,   KC_HOME,  KC_ENT,   KC_0,     KC_END
+ ),
+
+ /*
+   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
+
+   ┌───────────────────────────────────────────────────────────┐
+   │ t y p i n g   p r a c t i c e   ( E n t h i u m   v 1 4 ) │
+   └───────────────────────────────────────────────────────────┘
+             ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+             │    Q    │    Y    │    O    │    U    │    =    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    X    │    L    │    D    │    P    │    Z    │
+   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+   │    B    │    C    │    I    │    A    │    E    │    -    ├─╯                ╰─┤    K    │    H    │    T    │    N    │    S    │    W    │
+   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+   │   TAB   │    '    │    ,    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
+   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                 │    _    │  SPACE  │ARCANE L │   ESC   ││BASE LAYR│ARCANE R │    R    │   OSS   │
+                                 └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
+
+   [_TYPING] = LAYOUT_polydactyl(
+ //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
+               KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
+     KC_B,     KC_C,     KC_I,     KC_A,     KC_E,     KC_MINS,                       KC_K,     KC_H,     KC_T,     KC_N,     KC_S,     KC_W,
+     KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
+                                   KC_UNDS,  KC_SPC,   ARC_L,    KC_ESC,    BASE_LYR, ARC_R,    KC_R,     OS_LSFT
  ),
 
  /*
@@ -637,6 +662,9 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
         case _GAME_ALT:
             strcpy ( layer_state_str, "GAMING ALT");
             break;
+        case _TYPING:
+            strcpy ( layer_state_str, "TYPING PRACTICE");
+            break;
         default:
             strcpy ( layer_state_str, "XXXXXX");
     }
@@ -828,7 +856,7 @@ bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     const uint8_t mods = get_mods();
-    const uint8_t all_mods = (mods | get_weak_mods()
+    uint8_t all_mods = (mods | get_weak_mods()
 #ifndef NO_ACTION_ONESHOT
                             | get_oneshot_mods()
 #endif  // NO_ACTION_ONESHOT
@@ -989,8 +1017,11 @@ void process_arcane_same_hand(uint16_t keycode, keyrecord_t* record) {
     uint16_t last_keycode = get_last_keycode();
 
     switch (last_keycode) {
+        case KC_A:
         case CTRL_A: set_last_keycode(KC_O); break;
+        case KC_E:
         case SFT_E: set_last_keycode(KC_U); break;
+        case KC_H:
         case SFT_H: set_last_keycode(KC_L); break;
         case KC_J: set_last_keycode(KC_K); break;
         case KC_K: set_last_keycode(KC_L); break;
@@ -1015,13 +1046,16 @@ void process_arcane_opposite_hand(uint16_t keycode, keyrecord_t* record) {
 
 uint16_t get_skip_magic_keycode_user(uint16_t keycode, uint8_t mods) {
     switch (keycode) {
+        case KC_A:
         case CTRL_A: return KC_O;
         case KC_B: return KC_C;
+        case KC_C:
         case GUI_C: return KC_B;
         case KC_D: return KC_T;
 //      case SFT_E:
         case KC_F: return KC_N;
         case KC_G: return KC_T;
+        case KC_H:
         case SFT_H: return KC_L;
 //      case ALT_I:
         case KC_J: return KC_K;
@@ -1034,6 +1068,7 @@ uint16_t get_skip_magic_keycode_user(uint16_t keycode, uint8_t mods) {
         case KC_Q: return KC_I;
 //      case SYM_R:
 //      case GUI_S:
+        case KC_T:
         case CTRL_T: return KC_D;
         case KC_U: return KC_E;
         case KC_V: return KC_S;
@@ -1060,6 +1095,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_GUI]      = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_GAME]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
     [_GAME_ALT] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
+    [_TYPING]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),           ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
 };
 #endif
 

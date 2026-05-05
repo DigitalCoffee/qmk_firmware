@@ -2,6 +2,11 @@
 // │ c o m b o keys                                            │
 // └───────────────────────────────────────────────────────────┘
 
+COMBO_REF_LAYER(_ALPHA, _ALPHA)
+COMBO_REF_LAYER(_TYPING, _ALPHA)
+
+COMB(TYPING_LAYER, TO(_TYPING), GUI_UNDS, KC_BSPC)
+
 // ENTHIUM v14 RAKEDOWN & SLIDE COMBOS ├───────────────────────────────────┐
 
 COMB(RAKEDOWN_UE, RD_UE, KC_U, SFT_E)
