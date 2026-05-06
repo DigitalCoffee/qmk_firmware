@@ -1063,7 +1063,7 @@ uint16_t get_skip_magic_keycode_user(uint16_t keycode, uint8_t mods) {
         case KC_L: return KC_M;
         case KC_M: return KC_L;
 //      case ALT_N:
-        case KC_O: return KC_I;
+        case KC_O: return KC_A;
         case KC_P: return KC_N;
         case KC_Q: return KC_I;
 //      case SYM_R:
