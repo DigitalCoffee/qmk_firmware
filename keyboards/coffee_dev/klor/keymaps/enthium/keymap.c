@@ -214,7 +214,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
    │    B    │    C    │    I    │    A    │    E    │    -    ├─╯                ╰─┤    K    │    H    │    T    │    N    │    S    │    W    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │   TAB   │    '    │    ,    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
+   │   TAB   │    '    │    `    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                  │    _    │  SPACE  │ARCANE L │   ESC   ││  BSPCE  │ARCANE R │    R    │   OSS   │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
@@ -223,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     GUI_C,    ALT_I,    CTRL_A,   SFT_E,    KC_MINS,                       KC_K,     SFT_H,    CTRL_T,   ALT_N,    GUI_S,    KC_W,
-     KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
+     KC_TAB,   KC_QUOT,  KC_GRV,   KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
                                    GUI_UNDS, CRSR_SPC, NUM_ARCL, SYS_ESC,   KC_BSPC,  ARC_R,    SYM_R,    OS_LSFT
 ),
 
@@ -406,7 +406,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
    │    B    │    C    │    I    │    A    │    E    │    -    ├─╯                ╰─┤    K    │    H    │    T    │    N    │    S    │    W    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │   TAB   │    '    │    ,    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
+   │   TAB   │    '    │    `    │    .    │    ;    │    /    ││  MUTE  ││PLY/PSE ││    J    │    M    │    G    │    F    │    V    │  ENTER  │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                                  │    _    │  SPACE  │ARCANE L │   ESC   ││BASE LAYR│ARCANE R │    R    │   OSS   │
                                  └─────────┴─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┴─────────┘ */
@@ -415,7 +415,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷         ╷
                KC_Q,     KC_Y,     KC_O,     KC_U,     KC_EQL,                        KC_X,     KC_L,     KC_D,     KC_P,     KC_Z,
      KC_B,     KC_C,     KC_I,     KC_A,     KC_E,     KC_MINS,                       KC_K,     KC_H,     KC_T,     KC_N,     KC_S,     KC_W,
-     KC_TAB,   KC_QUOT,  KC_COMM,  KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
+     KC_TAB,   KC_QUOT,  KC_GRV,   KC_DOT,   KC_SCLN,  KC_SLSH,  KC_MUTE,   KC_MPLY,  KC_J,     KC_M,     KC_G,     KC_F,     KC_V,     KC_ENT,
                                    KC_UNDS,  KC_SPC,   ARC_L,    KC_ESC,    BASE_LYR, ARC_R,    KC_R,     OS_LSFT
  ),
 
@@ -969,6 +969,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     return true;
+}
+
+bool is_spacelike_key(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CRSR_SPC:
+            return record->tap.count;
+    }
+    return false;
 }
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐

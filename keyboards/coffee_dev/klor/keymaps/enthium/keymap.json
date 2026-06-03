@@ -1,6 +1,7 @@
 {
     "modules": [
         "DigitalCoffee/arcane",
+        "DigitalCoffee/comma_shift",
         "DigitalCoffee/quick_brackets",
         "DigitalCoffee/skip_magic",
         "getreuer/select_word",
