@@ -993,11 +993,12 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         case KC_MUTE:
         case KC_MPLY:
         case SKP_MGC:
-        case GUI_UNDS:
         case NUM_ARCL:
         case COMB_ARC_SPC:
         case COMB_ARC_R:
             return false;
+        case GUI_UNDS:
+            return record->tap.count;
     }
     return remember_last_key_arcane(keycode, record, remembered_mods);
 }
@@ -1033,16 +1034,16 @@ void process_arcane_same_hand(uint16_t keycode, keyrecord_t* record) {
         case SFT_H: set_last_keycode(KC_L); break;
         case KC_J: set_last_keycode(KC_K); break;
         case KC_K: set_last_keycode(KC_L); break;
-        case KC_Q: if (record->event.pressed) { SEND_STRING("ua"); return; }
+        case KC_Q: if (record->event.pressed) { SEND_STRING("ua"); } return;
         case KC_R:
-        case SYM_R: if (record->event.pressed) { SEND_STRING("ing"); return; }
+        case SYM_R: if (record->event.pressed) { SEND_STRING("ing"); } return;
         case KC_V: set_last_keycode(KC_S); break;
         case KC_W: set_last_keycode(KC_S); break;
         case KC_X: set_last_keycode(KC_H); break;
         case KC_Y: set_last_keycode(KC_QUOT); break;
 
         case KC_SPC:
-        case CRSR_SPC: if (record->event.pressed) { SEND_STRING("the "); return; }
+        case CRSR_SPC: if (record->event.pressed) { SEND_STRING("the "); } return;
     }
     repeat_key_invoke(&record->event);
     set_last_keycode(last_keycode);
